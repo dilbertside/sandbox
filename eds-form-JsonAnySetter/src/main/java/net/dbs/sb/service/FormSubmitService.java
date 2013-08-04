@@ -9,8 +9,10 @@ import java.util.Date;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import ch.ralscha.extdirectspring.annotation.ExtDirectMethod;
@@ -21,8 +23,11 @@ import net.dbs.sb.FormBean;
 public class FormSubmitService {
 
 	@ExtDirectMethod(FORM_POST)
-	public ExtDirectFormPostResult handleFormSubmit(FormBean bean, MultipartFile screenshot) {
-
+	public ExtDirectFormPostResult handleFormSubmit(
+	        @RequestBody  MultiValueMap<String, String> body,
+	        FormBean bean, 
+	        MultipartFile screenshot) {
+	    System.out.println(body.toSingleValueMap());
 	    Assert.notEmpty(bean.any(), "@JsonAnySetter not filled");
 		String resultString = "Server received: \n" + bean.toString();
 		resultString += "\n";
