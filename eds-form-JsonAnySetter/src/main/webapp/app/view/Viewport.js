@@ -20,15 +20,19 @@ Ext.define('Starter.view.Viewport', {
 				type: 'hbox'
 			},
 			flex: 1,
-			items: [ {
+			items: [ /*{
 				xtype: 'storepanel',
 				flex: 1,
 				margins: 5
-			}, {
-				xtype: 'pollpanel',
+			}*/{
+				xtype: 'container',
+				html: 'nothing yet',
 				flex: 1,
 				margins: 5
-			} ]
+			}, Ext.create('Starter.view.FormPanel2', {
+				flex: 1,
+				margins: 5
+			}) ]
 		}, {
 			xtype: 'container',
 			layout: {
@@ -39,11 +43,16 @@ Ext.define('Starter.view.Viewport', {
 			items: [ Ext.create('Starter.view.FormPanel', {
 				flex: 1,
 				margins: 5
-			}), {
+			}),{
+				xtype: 'container',
+				html: 'nothing yet',
+				flex: 1,
+				margins: 5
+			}, /*{
 				xtype: 'companytreepanel',
 				flex: 1,
 				margins: 5
-			} ]
+			}*/ ]
 		} ];
 
 		this.callParent(arguments);

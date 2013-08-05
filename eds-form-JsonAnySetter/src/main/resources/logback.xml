@@ -8,6 +8,9 @@
     </encoder>   
   </appender>
 
+	<logger name="org.springframework.web.servlet.mvc" level="DEBUG"/>
+	<logger name="net.dbs.sb" level="DEBUG"/>
+	
   <root level="WARN">    
     <appender-ref ref="STDOUT" />
   </root>  

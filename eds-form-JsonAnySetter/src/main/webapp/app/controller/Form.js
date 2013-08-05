@@ -1,43 +1,49 @@
 Ext.define('Starter.controller.Form', {
 	extend: 'Ext.app.Controller',
 
-	views: [ 'FormPanel' ],
+	views: [ 'FormPanel', 'FormPanel2' ],
 
 	refs: [ {
 		ref: 'formPanel',
 		selector: '#formPanel'
+	}, {
+		ref: 'formPanel2',
+		selector: '#formPanel2'
 	} ],
 
 	init: function() {
 		this.control({
-			'#formPanel button[action=form_load]': {
+			'button[action=form_load]': {
 				click: this.load
 			},
-			'#formPanel button[action=submit]': {
+			'button[action=submit]': {
 				click: this.submit
 			},
-			'#formPanel button[action=simple]': {
+			'button[action=simple]': {
 				click: this.fillRemark
 			}
 		});
 	},
 
-	fillRemark: function() {
+	fillRemark: function(btn) {
 		formLoadService.getRemark(function(result) {
-			this.getFormPanel().getForm().setValues({
+			this.getForm().setValues({
 				remarks: result
 			});
-		}, this);
+		}, btn.up('form'));
 	},
 
-	load: function() {
-		this.getFormPanel().getForm().load();
+	load: function(btn) {
+		btn.up('form').getForm().load();
 	},
 
-	submit: function() {
-		this.getFormPanel().getForm().submit({
+	submit: function(btn) {
+		btn.up('form').getForm().submit({
+			headers:{
+				'Content-Type': 'application/json;charset=UTF-8'
+			},
 			success: function(form, action) {
-				this.getFormPanel().getForm().setValues({
+				form.setValues({
 					remarks: action.result.response
 				});
 			},

@@ -1,8 +1,8 @@
-Ext.define('Starter.view.FormPanel', {
+Ext.define('Starter.view.FormPanel2', {
 	extend: 'Ext.form.Panel',
-	itemId: 'formPanel',
+	itemId: 'formPanel2',
 	bodyPadding: 10,
-	title: 'FORM_LOAD, FORM_POST and SIMPLE',
+	title: 'FORM_LOAD, FORM_POST and SIMPLE, NO MULTIPART',
 
 	layout: {
 		type: 'vbox',
@@ -13,7 +13,7 @@ Ext.define('Starter.view.FormPanel', {
 		Ext.applyIf(config, {
 			api: {
 				load: formLoadService.getFormData,
-				submit: formSubmitService.handleFormSubmit
+				submit: formSubmitService.handleFormSubmitNoMultipartFile
 			},
 			paramsAsHash: true,
 			jsonSubmit: true
@@ -44,10 +44,6 @@ Ext.define('Starter.view.FormPanel', {
 				name: 'date',
 				fieldLabel: 'Date',
 				value: new Date()
-			}, {
-				xtype: 'filefield',
-				name: 'screenshot',
-				fieldLabel: 'Screenshot'
 			}, {
 				xtype: 'textareafield',
 				name: 'remarks',
