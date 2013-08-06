@@ -32,29 +32,28 @@ Ext.define('Ext.ux.proxy.WebSocket', {
 
 
     socket : null,
+    url : null,
+    socket_request : null,
 
 
     doRequest : function(operation, callback, scope) {
         var me = this,
-            request = this.buildRequest(operation, callback, scope),
+            request = this.buildRequest(operation),
             timeout = Ext.isDefined(request.timeout) ? request.timeout : me.timeout,
-            url = request.url;
+            url = operation.getRequest().getUrl();
 
 
-        if (this.socket && url != this.socket.URL) {
+        if (this.socket && url != me.url) {
             this.socket.close();
             delete this.socket;
             this.socket = null;
         }
 
 
-        if (this.socket == null) {
-            this.socket = new WebSocket(url);
-            this.socket.onmessage = function(evt) { me.onMessageHandler(evt); };
-            this.socket.onclose = function(evt) { alert('Closed Connection'); };
-            this.socket.requestCallback = callback;
+        if (this.socket === null) {
+            this.url = url;
+            this.connect();
         }
-        // else trigger a refresh request
 
 
         Ext.apply(request, {
@@ -62,12 +61,12 @@ Ext.define('Ext.ux.proxy.WebSocket', {
             timeout       : this.timeout,
             scope         : this,
             callback      : this.createRequestCallback(request, operation, callback, scope),
-            disableCaching: false
+            disableCaching: false // explicitly set it to false, ServerProxy handles caching
         });
 
 
         operation.setStarted();
-        this.socket.request = request;
+        this.socket_request = request;
 
 
         if (timeout > 0) {
@@ -77,41 +76,66 @@ Ext.define('Ext.ux.proxy.WebSocket', {
     },
 
 
+    onCloseHandler : function() {
+        this.socket = null;
+    },
+
+
+    close : function() {
+        if (this.socket) {
+            this.socket.close();
+            this.socket = null;
+        }
+    },
+
+
+    connect : function() {
+        if (this.socket === null) {
+            var me = this;
+            this.socket = new WebSocket(this.url);
+            // put onmessage function in setTimeout to get around ios websocket crash
+            this.socket.onmessage = function(evt) { setTimeout(function() {me.onMessageHandler(evt);}, 0); return me;};
+            this.socket.onclose = function(evt) { me.onCloseHandler(); };
+        }
+    },
+
+
     onMessageHandler : function(evt) {
-        var me = this,
-            request = this.socket.request,
-            operation = request.operation,
-            responseText = evt.data,
-            response;
+        if (this.socket_request.timeout) {
+            clearTimeout(this.socket_request.timeout);
+            this.socket_request.timeout = null;
+        }
 
 
-        clearTimeout(request.timeout);
-        response = {
-            responseText : responseText,
-        };
+        var response = evt.data || '';
+        this.fireEvent('requestcomplete', this, response, this.socket_request);
+        this.handleResponse(response, this.socket_request);
 
 
-        me.fireEvent('requestcomplete', me, response, request);
-        me.handleResponse(response, request)
+        return this;
     },
 
 
     handleTimeout: function(request){
+        if (this.socket_request.timeout) {
+            clearTimeout(this.socket_request.timeout);
+            this.socket_request.timeout = null;
+        }
+
+
+        Ext.Msg.alert('Server Not Responding',
+                      'The server timed out when trying to data.',
+                      Ext.emptyFn);
+
+
         request.errorType = 'timeout';
-        this.handleResponse({responseText : ''}, request);
+        this.handleResponse({responseText : '{ \'items\' : []}'}, request);
     },
 
 
     handleResponse: function(result, request){
         var success = true;
-
-
-        if (request.timeout) {
-            clearTimeout(request.timeout);
-        }
-
-
-        // not sure what the point of this is but other examples do it.
+        // not sure what the point of this is.
         if (request.errorType) {
             success = false;
             Ext.callback(request.failure, request.scope, [request.errorType]);
@@ -125,9 +149,10 @@ Ext.define('Ext.ux.proxy.WebSocket', {
     createRequestCallback: function(request, operation, callback, scope) {
         var me = this;
         return function(success, response, errorType) {
+            // console.log(arguments);
             // calls Ext.proxy.Server.processResponse which reads the response
             // calls the reader and converts everything into a model inst
             me.processResponse(success, operation, request, response, callback, scope);
         };
-    },
+    }
 });
