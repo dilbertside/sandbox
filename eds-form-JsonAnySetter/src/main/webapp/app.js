@@ -1,5 +1,6 @@
 Ext.Loader.setConfig({
-	enabled: true
+	enabled: true,
+	disableCaching: false
 });
 
 Ext.require('Ext.direct.*', function() {
