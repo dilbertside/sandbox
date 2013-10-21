@@ -28,7 +28,7 @@ import net.dbs.sb.FormBean;
 public class FormSubmitService {
 
     private final static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-	@ExtDirectMethod(FORM_POST)
+	@ExtDirectMethod(value=FORM_POST, formHandler = true)
 	public ExtDirectFormPostResult handleFormSubmit(
 	        @RequestBody  MultiValueMap<String, String> body,
 	        @Valid FormBean bean, 
@@ -49,7 +49,7 @@ public class FormSubmitService {
 		return result;
 	}
 	
-	@ExtDirectMethod(FORM_POST)
+	@ExtDirectMethod(value=FORM_POST, formHandler = false)
     public ExtDirectFormPostResult handleFormSubmitNoMultipartFile(
             @RequestBody  MultiValueMap<String, String> body,
             @Valid FormBean bean) {
