@@ -2,7 +2,8 @@ Ext.Loader.setConfig({
 	enabled: true,
 	disableCaching: false
 });
-
+Ext.Loader.setPath('Ext.ux', 'ext422/examples/ux');
+Ext.Loader.setPath('Starter', 'app');
 
 Ext.require('Ext.direct.*', function() {
 	var chartDataPoller = Ext.create('Ext.direct.PollingProvider', {
@@ -64,7 +65,7 @@ Ext.define('DirectSubmitEXTJSIV-9955', {
 });
 
 Ext.application({
-	controllers: [ 'Poll', 'User', 'Form' ],
+	controllers: [ /*'Poll', 'User',*/ 'Form' ],
 	autoCreateViewport: true,
 	name: 'Starter',
 	launch: function() {

@@ -7,10 +7,7 @@ Ext.define('Starter.view.Viewport', {
 		type: 'vbox'
 	},
 
-	requires: [ 'Starter.view.StorePanel', 
-	            'Starter.view.PollPanel', 
-	            'Starter.view.FormPanel',
-			    'Starter.view.TreePanel' ],
+	requires: [ 'Starter.view.FormPanel*'],
 
 	initComponent: function() {
 		this.items = [ {
@@ -24,12 +21,10 @@ Ext.define('Starter.view.Viewport', {
 				xtype: 'storepanel',
 				flex: 1,
 				margins: 5
-			}*/{
-				xtype: 'container',
-				html: 'nothing yet',
+			}*/Ext.create('Starter.view.FormPanel3', {
 				flex: 1,
 				margins: 5
-			}, Ext.create('Starter.view.FormPanel2', {
+			}), Ext.create('Starter.view.FormPanel2', {
 				flex: 1,
 				margins: 5
 			}) ]
@@ -43,12 +38,10 @@ Ext.define('Starter.view.Viewport', {
 			items: [ Ext.create('Starter.view.FormPanel', {
 				flex: 1,
 				margins: 5
-			}),{
-				xtype: 'container',
-				html: 'nothing yet',
+			}),Ext.create('Starter.view.FormPanel4', {
 				flex: 1,
 				margins: 5
-			}, /*{
+			}), /*{
 				xtype: 'companytreepanel',
 				flex: 1,
 				margins: 5

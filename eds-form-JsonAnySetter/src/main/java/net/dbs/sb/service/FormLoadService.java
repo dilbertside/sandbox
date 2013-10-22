@@ -26,8 +26,8 @@ public class FormLoadService {
 		bean.setAvailableProcessors(osBean.getAvailableProcessors());
 		bean.setOsName(osBean.getName());
 		bean.setOsVersion(osBean.getVersion());
-		bean.setAny("extra1", "from any getter 1");
-		bean.setAny("extra2", "from any getter 2");
+		bean.set("extra1", "from any getter 1");
+		bean.set("extra2", "from any getter 2");
 		
 		return bean;
 	}

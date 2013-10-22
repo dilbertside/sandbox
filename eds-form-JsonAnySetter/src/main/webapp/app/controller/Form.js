@@ -1,7 +1,7 @@
 Ext.define('Starter.controller.Form', {
 	extend: 'Ext.app.Controller',
 
-	views: [ 'FormPanel', 'FormPanel2' ],
+	views: [ 'FormPanel', 'FormPanel2', 'FormPanel3', 'FormPanel4' ],
 	models: ['Form'],
 
 	refs: [ {
@@ -10,7 +10,7 @@ Ext.define('Starter.controller.Form', {
 	}, {
 		ref: 'formPanel2',
 		selector: '#formPanel2'
-	} ],
+	}],
 
 	init: function() {
 		this.control({
@@ -39,22 +39,27 @@ Ext.define('Starter.controller.Form', {
 			scope: this,
 			success: function(form, action){
 				var record = this.getFormModel().create(action.result.data);
-				form.loadRecord(record);
+				//form.loadRecord(record);
 			}
 		});
 	},
 
 	submit: function(btn) {
 		btn.up('form').getForm().submit({
-			headers:{
+			scope: this,
+			/*headers:{
 				'Content-Type': 'application/json;charset=UTF-8'
-			},
+			},*/
 			success: function(form, action) {
 				form.setValues({
 					remarks: action.result.response
 				});
 			},
-			scope: this
+			failure: function(form, action) {
+				form.setValues({
+					remarks: action.result ? action.result.response : 'Error server'
+				});
+			}
 		});
 	}
 

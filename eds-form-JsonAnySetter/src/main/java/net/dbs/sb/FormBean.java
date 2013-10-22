@@ -11,9 +11,11 @@ import ch.ralscha.extdirectspring.generator.Model;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 //@Model(value = "Starter.model.Form", paging = false, disablePagingParameters = true)
 @SuppressWarnings("unused")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class FormBean {
 
 	private String osName;
@@ -80,17 +82,9 @@ public class FormBean {
         return any;
     }
 
-    /**
-     * @param any the any to set
-     */
     @JsonAnySetter
-    public void setAny(Map<String, Object> any) {
-        this.any = any;
-    }
-    
-    @JsonIgnore
-    public void setAny(String name, Object value) {
-        any.put(name, value);
+    public void set(String name, Object value) {
+        this.any.put(name, value);
     }
     
     @JsonIgnore

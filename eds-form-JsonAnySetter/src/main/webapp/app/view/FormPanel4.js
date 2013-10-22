@@ -1,8 +1,8 @@
-Ext.define('Starter.view.FormPanel', {
+Ext.define('Starter.view.FormPanel4', {
 	extend: 'Ext.form.Panel',
-	itemId: 'formPanel',
+	itemId: 'formPanel4',
 	bodyPadding: 10,
-	title: 'FORM_LOAD, FORM_POST and SIMPLE, MULTIPART',
+	title: 'FORM_LOAD, FORM_POST and SIMPLE, NO MULTIPART, standard',
 
 	layout: {
 		type: 'vbox',
@@ -13,9 +13,10 @@ Ext.define('Starter.view.FormPanel', {
 		Ext.applyIf(config, {
 			api: {
 				load: formLoadService.getFormData,
-				submit: formSubmitService.handleFormMultipartSubmit
+				submit: formSubmitService.handleFormSubmit
 			},
-			paramsAsHash: true
+			paramsAsHash: true,
+			jsonSubmit: true
 		});
 		this.callParent(arguments);
 	},
@@ -44,26 +45,10 @@ Ext.define('Starter.view.FormPanel', {
 				fieldLabel: 'Date',
 				value: new Date()
 			}, {
-				xtype: 'filefield',
-				name: 'screenshot',
-				fieldLabel: 'Screenshot'
-			}, {
 				xtype: 'textareafield',
 				name: 'remarks',
 				fieldLabel: 'Remarks',
 				flex: 1
-			}, {
-				xtype: 'textfield',
-				name: 'extra1',
-				fieldLabel: 'Extra field 1 not part of bean FormBean',
-				flex: 1,
-				value: 'extra 1'
-			}, {
-				xtype: 'textfield',
-				name: 'extra2',
-				fieldLabel: 'Extra field 2 not part of bean FormBean',
-				flex: 1,
-				value: 'extra 2'
 			} ],
 
 			buttons: [ {
