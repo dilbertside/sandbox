@@ -2,6 +2,7 @@ Ext.define('Starter.controller.Form', {
 	extend: 'Ext.app.Controller',
 
 	views: [ 'FormPanel', 'FormPanel2' ],
+	models: ['Form'],
 
 	refs: [ {
 		ref: 'formPanel',
@@ -34,7 +35,13 @@ Ext.define('Starter.controller.Form', {
 	},
 
 	load: function(btn) {
-		btn.up('form').getForm().load();
+		btn.up('form').getForm().load({
+			scope: this,
+			success: function(form, action){
+				var record = this.getFormModel().create(action.result.data);
+				form.loadRecord(record);
+			}
+		});
 	},
 
 	submit: function(btn) {

@@ -6,10 +6,14 @@ import java.util.Map;
 
 import javax.validation.constraints.NotNull;
 
+import ch.ralscha.extdirectspring.generator.Model;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+//@Model(value = "Starter.model.Form", paging = false, disablePagingParameters = true)
+@SuppressWarnings("unused")
 public class FormBean {
 
 	private String osName;
