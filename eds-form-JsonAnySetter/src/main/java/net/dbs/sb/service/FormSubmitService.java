@@ -39,15 +39,14 @@ public class FormSubmitService {
     @Autowired 
     protected org.springframework.validation.Validator validator;
     
-	@ExtDirectMethod(value=FORM_POST)
+	@ExtDirectMethod(value=ExtDirectMethodType.FORM_POST_JSON)
 	public ExtDirectFormPostResult handleFormMultipartSubmit(
-	        @RequestBody  MultiValueMap<String, String> body,
+	        //@RequestBody  MultiValueMap<String, String> body,
 	        @Valid FormBean bean, 
 	        MultipartFile screenshot) {
-	    logger.debug("body [{}]", body.toSingleValueMap());
-	    Assert.notEmpty(bean.any(), "@JsonAnySetter not filled");
-		String resultString = "Server received: \n" + bean.toString();
-		resultString += "\n";
+	    //logger.debug("body [{}]", body.toSingleValueMap());
+	    //Assert.notEmpty(bean.any(), "@JsonAnySetter not filled");
+		String resultString = "Server received: \n" + bean.toString() + "\n";
 
 		if (!screenshot.isEmpty()) {
 			resultString += "ContentType: " + screenshot.getContentType() + "\n";
@@ -91,9 +90,8 @@ public class FormSubmitService {
     }
 	
 	@ExtDirectMethod(value=ExtDirectMethodType.FORM_POST_JSON)
-    public ExtDirectFormPostResult handleFormSubmitNoMultipartFileNoExtra(@Valid FormBean bean) {
-        String resultString = "Server received: \n" + bean.toString();
-        resultString += "\n";
+    public ExtDirectFormPostResult handleFormSubmitNoMultipartFileNoExtra(@Valid FormBean bean, BindingResult result1) {
+        String resultString = "Server received: \n" + bean.toString() + "\n";
 
         ExtDirectFormPostResult result = new ExtDirectFormPostResult();
         result.addResultProperty("response", resultString);
