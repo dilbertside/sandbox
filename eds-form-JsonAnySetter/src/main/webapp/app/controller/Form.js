@@ -47,9 +47,10 @@ Ext.define('Starter.controller.Form', {
 	submit: function(btn) {
 		btn.up('form').getForm().submit({
 			scope: this,
-			/*headers:{
-				'Content-Type': 'application/json;charset=UTF-8'
-			},*/
+			params: {
+		        p1: 1000,
+		        p2: 'param 2'
+		    },
 			success: function(form, action) {
 				form.setValues({
 					remarks: action.result.response

@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.MultiValueMap;
@@ -24,6 +25,9 @@ import org.springframework.validation.DataBinder;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import ch.ralscha.extdirectspring.annotation.ExtDirectMethod;
@@ -31,7 +35,7 @@ import ch.ralscha.extdirectspring.annotation.ExtDirectMethodType;
 import ch.ralscha.extdirectspring.bean.ExtDirectFormPostResult;
 import net.dbs.sb.FormBean;
 
-@Service
+@Controller
 public class FormSubmitService {
 
     private final static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -39,13 +43,14 @@ public class FormSubmitService {
     @Autowired 
     protected org.springframework.validation.Validator validator;
     
-	@ExtDirectMethod(value=ExtDirectMethodType.FORM_POST_JSON)
+	@ExtDirectMethod(value=ExtDirectMethodType.FORM_POST)
+	@RequestMapping(value = "/handleFormMultipartSubmit", method = RequestMethod.GET)
 	public ExtDirectFormPostResult handleFormMultipartSubmit(
-	        //@RequestBody  MultiValueMap<String, String> body,
+	        @RequestBody  MultiValueMap<String, String> body,
 	        @Valid FormBean bean, 
 	        MultipartFile screenshot) {
-	    //logger.debug("body [{}]", body.toSingleValueMap());
-	    //Assert.notEmpty(bean.any(), "@JsonAnySetter not filled");
+	    logger.debug("body [{}]", body.toSingleValueMap());
+	    Assert.notEmpty(bean.any(), "@JsonAnySetter not filled");
 		String resultString = "Server received: \n" + bean.toString() + "\n";
 
 		if (!screenshot.isEmpty()) {
@@ -71,6 +76,8 @@ public class FormSubmitService {
 	
 	@ExtDirectMethod(value=ExtDirectMethodType.FORM_POST_JSON)
     public ExtDirectFormPostResult handleFormSubmitNoMultipartFile(
+            @RequestParam(value = "p1", required = true) Long param1, 
+            @RequestParam(value = "p2", required = true) String param2,
             @Valid FormBean bean) throws Exception {
 	    DataBinder binder = new DataBinder(bean);
         binder.setValidator(this.validator);
