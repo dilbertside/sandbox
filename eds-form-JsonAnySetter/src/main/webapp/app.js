@@ -25,42 +25,28 @@ Ext.define('DirectSubmitEXTJSIV-9955', {
 		api = form.api,
 		fn = api.submit,
 		callback = Ext.Function.bind(me.onComplete, me),
-		formInfo,
+		formInfo = false,
 		params,
 		options;
 		
 		if (typeof fn !== 'function') {
-			//
-			var fnName = fn;
-			//
-			
 			api.submit = fn = Ext.direct.Manager.parseMethod(fn);
-			
-			//
-			if (!Ext.isFunction(fn)) {
-				Ext.Error.raise('Cannot resolve Ext.Direct API method ' + fnName);
-			}
-			//
 		}
-		
 		if (me.timeout || form.timeout) {
 			options = {
-					timeout: me.timeout * 1000 || form.timeout * 1000
+				timeout: me.timeout * 1000 || form.timeout * 1000
 			};
 		}
-		
 		if (fn.directCfg.method.formHandler) {
 			formInfo = me.buildForm();
-			params = formInfo.formEl;
+			params = formInfo.formEl || formInfo;//extjs 4.1.3 has only formInfo
 		} else {
 			// Use model values, sending as json
 			params = me.getParams(true);
 		}
-		
 		fn.call(window, params, callback, me, options);
-		if (formInfo) {
-			me.cleanup(formInfo);
-		}
+		if (formInfo)
+			me.cleanup ? me.cleanup(formInfo) : Ext.removeNode(formInfo);
 	}
 });
 

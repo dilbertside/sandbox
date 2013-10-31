@@ -15,8 +15,7 @@ Ext.define('Starter.view.FormPanel4', {
 				load: formLoadService.getFormData,
 				submit: formSubmitService.handleFormSubmit
 			},
-			paramsAsHash: true,
-			jsonSubmit: true
+			paramsAsHash: true
 		});
 		this.callParent(arguments);
 	},
