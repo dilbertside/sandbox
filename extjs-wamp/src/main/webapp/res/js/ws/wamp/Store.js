@@ -15,65 +15,6 @@ Ext.define('Ext.ux.ws.wamp.Store', {
 			onupdate: proxy.api.onupdate ? me.onUpdate : Ext.emptyFn,
 			ondestroy: proxy.api.ondestroy ? me.onDestroy : Ext.emptyFn
 		});
-		
-		/*var proxy = me.model.getProxy();
-		if(proxy.api.oncreate)
-			proxy.on('oncreate', function(proxy, obj) {
-				var data = me.toArray(obj);
-				me.suspendAutoSync();
-				for ( var i = 0; i < data.length; i++) {
-					var record = me.getById(data[i][me.model.prototype.idProperty]);
-	
-					if (record) {
-						record.set(data[i]);
-						record.commit();
-					} else {
-						var records = [ new me.model(data[i]) ], options = {
-							addRecords: true,
-							start: 0
-						};
-						me.loadRecords(records, options);
-					}
-	
-					if (!(me.remoteSort || me.buffered)) {
-						me.sort();
-					}
-	
-					me.resumeAutoSync();
-				}
-			});
-
-		if(proxy.api.onupdate)
-			proxy.on('onupdate', function(proxy, obj) {
-				var data = me.toArray(obj);
-				me.suspendAutoSync();
-				for ( var i = 0; i < data.length; i++) {
-					var record = me.getById(data[i][me.model.prototype.idProperty]);
-					if (record) {
-						record.set(data[i]);
-						record.commit();
-					}
-				}
-	
-				if (!(me.remoteSort || me.buffered)) {
-					me.sort();
-				}
-	
-				me.resumeAutoSync();
-			});
-
-		if(proxy.api.ondestroy)
-			proxy.on('ondestroy', function(proxy, obj) {
-				var data = me.toArray(obj);
-				me.suspendAutoSync();
-				for ( var i = 0; i < data.length; i++) {
-					var record = me.getById(data[i][me.model.prototype.idProperty]);
-					if (record) {
-						me.remove(record);
-					}
-				}
-				me.resumeAutoSync();
-			});*/
 	},
 	/**
 	 * @param proxy wamp proxy
