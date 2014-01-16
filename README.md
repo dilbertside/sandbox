@@ -1,3 +1,37 @@
+project extjs-wamp webapp
+
+investigation to use Spring Framework 4 websockets with a sub-protocol WAMP.  
+This implementation uses Sencha ExtJS extension capability as a way to manage WAMP rpc and subscription to produce a newsfeed in real time.
+Frontend client ExtJS includes a WAMP manager (Ext.ux.ws.wamp.Manager) with a WAMP store and WAMP proxy.
+CRUD functions are implemented on the feed.
+create, update, delete topic subcriptions.
+read rpc call for initial load.
+
+Server uses Spring framework 4 with wampspring library and run on Tomcat 7.0.50.
+	https://github.com/dilbertside/wampspring
+forked from
+	https://github.com/ralscha/wampspring
+
+Reference:
+WAMP
+	http://wamp.ws/spec/
+	http://autobahn.ws/js/reference/
+SockJS - WebSocket emulation
+	https://github.com/sockjs
+Compact URI
+	https://en.wikipedia.org/wiki/CURIE
+
+Code contribution from
+AutobahnExtJS 
+	https://github.com/tavendo/AutobahnExtJS
+
+spring4ws-demos 
+	https://github.com/ralscha/spring4ws-demos
+
+-------------------------------
++++++++++++++++++++++++++++++++
+-------------------------------
+
 project eds-form-JsonAnySetter
 
 Library ExtDirecSpring
