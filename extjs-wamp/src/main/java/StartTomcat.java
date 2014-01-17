@@ -5,9 +5,9 @@ import ch.rasc.embeddedtc.EmbeddedTomcat;
 public class StartTomcat {
 	public static void main(String[] args) throws Exception {
 
-		EmbeddedTomcat et = new EmbeddedTomcat();
+		EmbeddedTomcat et = EmbeddedTomcat.create();
 
-		ContextResource res = new ContextResource();
+		/*ContextResource res = new ContextResource();
 		res.setName("jdbc/ds");
 		res.setType("javax.sql.DataSource");
 		res.setAuth("Container");
@@ -26,8 +26,10 @@ public class StartTomcat {
 
 		res.setProperty("defaultAutoCommit", "false");
 
-		et.addContextResource(res);
+		et.addContextResource(res);*/
 
+		et.addContextInitializationParameter("org.apache.tomcat.websocket.textBufferSize", "1000000");
+		et.setContextPath("/extjs-wamp");
 		et.startAndWait();
 	}
 

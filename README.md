@@ -12,6 +12,15 @@ Server uses Spring Framework 4 with wampspring library and run on Tomcat 7.0.50
 source code
 	https://github.com/ralscha/wampspring
 
+to run it without IDE
+git clone https://github.com/dilbertside/sandbox.git
+cd sandbox/extjs-wamp
+mvn package
+deploy the war built in target in your favourite websocket compatible servlet container
+open your browser at http://localhost:8080/extjs-wamp/index.html
+or with an IDE
+Run StartTomcat class in the default package as a standard java program.
+
 Reference:
 WAMP
 	http://wamp.ws/spec/
@@ -28,19 +37,15 @@ AutobahnExtJS
 spring4ws-demos 
 	https://github.com/ralscha/spring4ws-demos
 
--------------------------------
-+++++++++++++++++++++++++++++++
--------------------------------
+______________________________________
 
 ## project eds-form-JsonAnySetter
 
 Library ExtDirecSpring
 related to enhancement request https://github.com/ralscha/extdirectspring/issues/96
 
+______________________________________
 
--------------------------------
-+++++++++++++++++++++++++++++++
--------------------------------
 ## demo extjs-websocket
 
 tentative to investigate/integrate 
