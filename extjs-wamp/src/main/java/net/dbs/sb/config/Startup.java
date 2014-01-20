@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
+//import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class Startup implements ApplicationListener<ContextRefreshedEvent> {
@@ -15,7 +15,7 @@ public class Startup implements ApplicationListener<ContextRefreshedEvent> {
 	private PasswordEncoder passwordEncoder;
 
 	@Override
-	@Transactional
+	//@Transactional
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 
 	}
