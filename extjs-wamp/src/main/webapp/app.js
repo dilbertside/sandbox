@@ -2,8 +2,8 @@ Ext.Loader.setConfig({
 	enabled: true,
 	disableCaching: false
 });
-Ext.Loader.setPath('Ext.ux', 'ext422/examples/ux');
-//Ext.Loader.setPath('Ext.ux', 'http://cdn.sencha.com/ext/gpl/4.2.1/examples/ux');
+//Ext.Loader.setPath('Ext.ux', 'ext422/examples/ux');
+Ext.Loader.setPath('Ext.ux', 'http://cdn.sencha.com/ext/gpl/4.2.1/examples/ux');
 Ext.Loader.setPath('Ext.ux.ws.wamp', 'res/js/ws/wamp');
 Ext.Loader.setPath('WA', 'app');
 
