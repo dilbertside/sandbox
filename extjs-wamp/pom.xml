@@ -11,7 +11,7 @@
 	</prerequisites>
 
 	<properties>
-		<spring.version>4.0.0.RELEASE</spring.version>
+		<spring.version>4.0.1.RELEASE</spring.version>
 		<spring-security.version>3.2.0.RELEASE</spring-security.version>
 
 		<hibernate.version>4.3.0.Final</hibernate.version>
@@ -177,7 +177,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>16.0-rc1</version>
+			<version>16.0</version>
 		</dependency>
 
 		<dependency>
@@ -245,7 +245,7 @@
 		<dependency>
 			<groupId>ch.rasc</groupId>
 			<artifactId>wampspring</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish.web</groupId>

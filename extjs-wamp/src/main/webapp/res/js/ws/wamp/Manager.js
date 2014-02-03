@@ -63,7 +63,7 @@ Ext.define ('Ext.ux.ws.wamp.Manager', {
 		return this.absession !== null;
 	},
 	setDebug: function(isDebug){
-		ab.debug(this.debug = isDebug);
+		ab.debug(this.debug = isDebug, isDebug);
 		return this;
 	},
 	start: function(){

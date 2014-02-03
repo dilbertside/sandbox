@@ -1,9 +1,9 @@
 Ext.define('WA.controller.Items', {
 	extend: 'Ext.app.Controller',
 
-	views: [ 'GridItems'],
-	stores: [ 'Items'],
-	models: [ 'Item'],
+	views: [ 'GridItems', 'GridItemsW'],
+	stores: [ 'Items', 'ItemsW'],
+	models: [ 'Item', 'ItemW'],
 	init: function() {
 		this.control({
 			'griditems': {

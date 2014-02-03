@@ -1,5 +1,6 @@
 package net.dbs.sb.service;
 
+import java.text.Format;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,8 @@ public class NewsService {
     private EventMessenger eventMessenger;
     
     private final Random random = new Random();
-    Queue<DateTime> queue = new LinkedBlockingQueue<DateTime>(100);
+    private Queue<DateTime> queue = new LinkedBlockingQueue<DateTime>(100);
+    private String[] asean = new String[]{"thailand", "malaysia", "singapore", "indonesia", "cambodia", "laos", "vietnam", "philipines", "myanmar", "brunei"};
 
     @WampCallListener({/*"news:read",*/ "http://localhost:8080/extjs-wamp/news#read"})
     public List<Map<String, Object>> newsRead(CallMessage callMessage, StoreReadRequest readRequest) throws Throwable {
@@ -48,6 +50,8 @@ public class NewsService {
     public void sendNews() {
         final DateTime now = DateTime.now();
         eventMessenger.sendToAll("news:oncreate", Collections.singletonList(buildNewsItem(now, "Life is good")));
+        String country = asean[random.nextInt(9)];
+        eventMessenger.sendToAll(String.format("newsagency.joke.asean.%s", country) , Collections.singletonList(buildNewsItem(now, "Life is good from " + country)));
         queue.offer(now);
     }
     
