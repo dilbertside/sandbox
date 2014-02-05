@@ -4,7 +4,7 @@ Ext.define('WA.view.GridItemsW', {
     requires:['Ext.ux.PreviewPlugin'],
     hideHeaders: true,
     autoScroll: true,
-    title: 'News every 10 seconds ',
+    title: 'News every 5 seconds, dyn routing per country, newsagency/joke/asean/*',
     viewConfig: {
         preserveScrollOnRefresh: true,
         plugins: [{

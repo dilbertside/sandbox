@@ -27,7 +27,7 @@ public class WebSocketConfig extends WampConfigurerAdapter {
     @Override
     public PathMatcher pathMatcher() {
         AntPathMatcher matcher = new AntPathMatcher();
-        matcher.setPathSeparator(".");
+        //matcher.setPathSeparator(".");
         return matcher;
     }
 

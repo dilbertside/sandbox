@@ -2893,7 +2893,27 @@ var AUTOBAHNJS_VERSION = '?.?.?';
                });
             }
             else {
-               // ignore unsolicited event!
+            	var i = subid.indexOf("*"), sub;
+            	if (i >= 0){
+            		for ( var p in self._subscriptions) {
+            			if(RoutePattern.fromString(subid).matches(p)){
+            				sub = subid;
+            				break;//we assume one match
+            			}
+					}
+            	}else{
+            		for ( var p in self._subscriptions) {
+            			if(p.indexOf("*") >= 0 && RoutePattern.fromString(p).matches(subid)){
+            				sub = p;
+            				break;//we assume one match
+            			}
+					}
+            	}
+            	if(sub)
+            		self._subscriptions[sub].forEach(function (callback) {
+  	                  callback(o[1], o[2]);
+  	               });
+            		
             }
          }
          else if (o[0] === ab._MESSAGE_TYPEID_WELCOME)

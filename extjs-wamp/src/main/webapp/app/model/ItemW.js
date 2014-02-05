@@ -11,12 +11,12 @@ Ext.define('WA.model.ItemW', {
 			create: 'create',
 			//read: 'read',
 			//update: 'update',
-			//destroy: 'destroy',
+			destroy: 'destroy',
 
 			// Topic URIs for CRUD events
-			oncreate: 'newsagency.joke.asean.*',
+			oncreate: 'newsagency/joke/asean/*',
 			//onupdate: 'onupdate',
-			//ondestroy: 'ondestroy'
+			ondestroy: 'del/newsagency/joke/asean/*'
 		}
 	}
 });

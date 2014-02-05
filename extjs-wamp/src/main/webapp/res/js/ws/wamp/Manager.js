@@ -73,6 +73,7 @@ Ext.define ('Ext.ux.ws.wamp.Manager', {
 		ab._construct = function(url, protocols) {
 			return new SockJS(url);
 		};
+		//ab._subPatternFn = {scope: me, fn: function(s){console.log(s);}};
 		ab.connect(me.wsuri, me.onconnect, me.onhangup, {	//params
 			maxRetries: me.maxRetries,
 			retryDelay: me.retryDelay,

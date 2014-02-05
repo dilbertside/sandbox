@@ -8,6 +8,7 @@
     </encoder>   
   </appender>
   
+  <logger name="net.dbs.sb" level="DEBUG"/>
   <logger name="ch.rasc.wampspring" level="DEBUG"/>
 	
   <root level="WARN">    
