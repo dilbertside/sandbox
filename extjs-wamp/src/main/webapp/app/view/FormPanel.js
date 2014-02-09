@@ -6,8 +6,8 @@ Ext.define('WA.view.FormPanel', {
 	title: 'Wamp form load and post',
 
 	layout: {
-		type: 'vbox',
-		align: 'stretch'
+		type: 'hbox',
+		align: 'top'
 	},
 
 	constructor: function(config) {
@@ -17,7 +17,7 @@ Ext.define('WA.view.FormPanel', {
 				load: 'http://localhost:8080/extjs-wamp/news#load',
 				submit: 'http://localhost:8080/extjs-wamp/news#post'
 			},
-			paramsAsHash: true
+			paramsAsHash: true,
 		});
 		this.callParent(arguments);
 	},
@@ -26,46 +26,58 @@ Ext.define('WA.view.FormPanel', {
 		var me = this;
 
 		Ext.applyIf(me, {
-
+			buttonAlign: 'right',
+			bbar: Ext.create('Ext.ux.statusbar.StatusBar', {
+		        id: 'form-status',
+		        defaultText: 'Form Ready',
+		        defaultIconCls: 'x-status-valid',
+		        text: 'Form Ready',
+		        iconCls: 'x-status-valid',
+		        statusAlign: 'right',
+		        items: [ '-', {
+					xtype: 'button',
+					text: 'Wamp load form',
+					action: 'load'
+				}, {
+					text: 'Wamp submit form',
+					action: 'submit',
+					disabled: true,
+					formBind: true
+				}]
+		    }),
+			fieldDefaults: {
+				labelAlign: 'top',
+				margin: 5
+			},
 			items: [ {
 				xtype: 'textfield',
 				name: 'title',
 				fieldLabel: 'Title',
-				allowBlank: false
+				allowBlank: false,
+				width: 300
 			}, {
 				xtype: 'datefield',
 				name: 'pubDate',
 				fieldLabel: 'Date',
-				value: new Date(),
+				width: 200,
+				//value: new Date(),
 				submitFormat: 'time',
 				altFormats: 'time',
 				format: 'Y-m-d H:i:sO',
-				allowBlank: false
+				//allowBlank: false,
+				afterSubTpl: 'should be mandatory,<br> for testing purpose send empty,<br> submit will fail'
 			}, {
-				xtype: 'textfield',
+				xtype: 'textarea',
 				name: 'encoded',
 				fieldLabel: 'Text',
-				flex: 1,
-				allowBlank: false
+				allowBlank: false,
+				width: 300
 			}, {
 				xtype: 'textfield',
 				name: 'author',
 				fieldLabel: 'author',
-				flex: 1,
 				value: 'myself'
-			} ],
-
-			buttons: [ {
-				xtype: 'button',
-				text: 'Wamp Load',
-				action: 'load'
-			}, {
-				text: 'Wamp Submit ',
-				action: 'submit',
-				disabled: true,
-				formBind: true
 			} ]
-
 		});
 
 		me.callParent(arguments);

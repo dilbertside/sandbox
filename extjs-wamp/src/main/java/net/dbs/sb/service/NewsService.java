@@ -87,7 +87,8 @@ public class NewsService {
     public ExtDirectFormPostResult formPost(CallMessage callMessage, News news) throws Throwable {
         BindingResult result = validateEntity(news);
         ExtDirectFormPostResult formPostResult = new ExtDirectFormPostResult(result);
-        formPostResult.addResultProperty("extra", DateTime.now().toString());
+        if(result.hasErrors())
+            formPostResult.addResultProperty("message", "Wamp server validation failed, form field(s) is/are invalid");
         return formPostResult;
     }
 
@@ -98,7 +99,7 @@ public class NewsService {
         queue.offer(now);
     }
     
-    @Scheduled(fixedDelay = 15000)
+    @Scheduled(fixedDelay = 5000)
     public void sendNewsRouting() {
         final DateTime now = DateTime.now();
         String country = asean[random.nextInt(11)];
@@ -107,7 +108,7 @@ public class NewsService {
         logger.debug("news routing to country {}", country);
     }
     
-    @Scheduled(fixedDelay = 15000)
+    @Scheduled(fixedDelay = 60000)
     public void updateNews() {
         DateTime dt = queue.peek();
         if(null != dt){

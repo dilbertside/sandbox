@@ -7,17 +7,17 @@
     <meta charset="utf-8">
 	
 	<!-- <link rel="stylesheet" href="ext422/resources/css/ext-all-gray.css" />
+	<link rel="stylesheet" href="ext422/examples/ux/statusbar/css/statusbar.css" />
 	<script charset="utf-8" src="ext422/ext-dev.js"></script>
 	<script src="ext422/ext-theme-gray.js"></script> 
 	<script src="res/js/sockjs-0.3.4.js"></script>
-	<script type="text/javascript" src="res/js/route-pattern-standalone.js"></script>
-	
-	-->
-	
+	<script type="text/javascript" src="res/js/route-pattern-standalone.js"></script> -->
 	
 	<link rel="stylesheet" href="http://cdn.sencha.com/ext/gpl/4.2.1/resources/css/ext-all-gray.css" />
+	<link rel="stylesheet" href="http://cdn.sencha.com/ext/gpl/4.2.1/examples/ux/statusbar/css/statusbar.css" />
 	<script src="http://cdn.sencha.com/ext/gpl/4.2.1/ext-all.js"></script>
-	<script src="http://cdn.sencha.com/ext/gpl/4.2.1/ext-theme-gray.js"></script> 
+	<script src="http://cdn.sencha.com/ext/gpl/4.2.1/ext-theme-gray.js"></script>
+	<script src="http://cdn.sencha.com/ext/gpl/4.2.1/examples/ux/statusbar/StatusBar.js"></script>
 	<script src="res/js/sockjs-0.3.4.min.js"></script>
 	<script type="text/javascript" src="res/js/route-pattern-standalone.min.js"></script>
 	

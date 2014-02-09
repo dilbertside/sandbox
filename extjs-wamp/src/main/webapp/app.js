@@ -6,11 +6,13 @@ Ext.Loader.setConfig({
 Ext.Loader.setPath('Ext.ux', 'http://cdn.sencha.com/ext/gpl/4.2.1/examples/ux');
 Ext.Loader.setPath('Ext.ux.ws.wamp', 'res/js/ws/wamp');
 Ext.Loader.setPath('WA', 'app');
-//to load Wamp ExtJs form load and submit 
+//to enable Wamp ExtJs form load and submit 
 Ext.Loader.loadScript({url: 'res/js/ws/wamp/Form.js'});
 
 Ext.application({
-	requires:['Ext.ux.ws.wamp.Manager', 'Ext.ux.ws.wamp.Proxy', 'Ext.ux.ws.wamp.Store'],
+	requires:['Ext.ux.ws.wamp.Manager',
+	          'Ext.ux.ws.wamp.Proxy', 'Ext.ux.ws.wamp.Store'//enable grid store Wamp mode
+	          ],
 	controllers: [ 'Items' ],
 	autoCreateViewport: true,
 	name: 'WA',
