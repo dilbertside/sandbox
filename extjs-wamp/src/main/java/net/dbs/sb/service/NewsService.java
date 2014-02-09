@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 
+import net.dbs.sb.dto.News;
 import net.dbs.sb.dto.StoreReadRequest;
 
 import org.joda.time.DateTime;
@@ -19,7 +20,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.ValidationUtils;
 
+import ch.ralscha.extdirectspring.bean.ExtDirectFormLoadResult;
+import ch.ralscha.extdirectspring.bean.ExtDirectFormPostResult;
 import ch.rasc.wampspring.EventMessenger;
 import ch.rasc.wampspring.annotation.WampCallListener;
 import ch.rasc.wampspring.message.CallMessage;
@@ -39,10 +45,11 @@ public class NewsService {
     private final static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     @Autowired
     private EventMessenger eventMessenger;
-    
+    @Autowired 
+    protected org.springframework.validation.Validator validator;
     private final Random random = new Random();
     private Queue<DateTime> queue = new LinkedBlockingQueue<DateTime>(1000);
-    private String[] asean = new String[]{"thailand", "malaysia", "singapore", "indonesia", "cambodia", "laos", "vietnam", "philipines", "myanmar", "brunei"};
+    private String[] asean = new String[]{"Thailand", "Malaysia", "Singapore", "Indonesia", "Cambodia", "Laos", "Vietnam", "Philippines", "Myanmar", "Brunei", "Timor-Leste", "Papua New Guinea"};
     
     private Cache<DateTime, String> cache;
     
@@ -69,6 +76,20 @@ public class NewsService {
         }
         return list;
     }
+    
+    @SuppressWarnings("unchecked")
+    @WampCallListener({"http://localhost:8080/extjs-wamp/news#load"})
+    public ExtDirectFormLoadResult formLoad(CallMessage callMessage) throws Throwable {
+        return new ExtDirectFormLoadResult(Lists.newArrayList(buildNewsItem(DateTime.now(), "Form news")));
+    }
+    
+    @WampCallListener({"http://localhost:8080/extjs-wamp/news#post"})
+    public ExtDirectFormPostResult formPost(CallMessage callMessage, News news) throws Throwable {
+        BindingResult result = validateEntity(news);
+        ExtDirectFormPostResult formPostResult = new ExtDirectFormPostResult(result);
+        formPostResult.addResultProperty("extra", DateTime.now().toString());
+        return formPostResult;
+    }
 
     @Scheduled(fixedDelay = 10000)
     public void sendNews() {
@@ -77,10 +98,10 @@ public class NewsService {
         queue.offer(now);
     }
     
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 15000)
     public void sendNewsRouting() {
         final DateTime now = DateTime.now();
-        String country = asean[random.nextInt(9)];
+        String country = asean[random.nextInt(11)];
         eventMessenger.sendToAll(String.format("newsagency/joke/asean/%s", country) , Collections.singletonList(buildNewsItem(now, "Life is good from " + country)));
         cache.put(now, country);
         logger.debug("news routing to country {}", country);
@@ -115,7 +136,7 @@ public class NewsService {
 
     private Map<String, Object> buildNewsItem(DateTime now, String content) {
         Map<String, Object> item = Maps.newHashMapWithExpectedSize(4);
-        int val = random.nextInt();
+        int val = random.nextInt(1000000);
         item.put("title", "News " + val);
         item.put("pubDate", now.getMillis());
         String encoded =
@@ -126,5 +147,11 @@ public class NewsService {
         item.put("encoded", encoded);
         return item;
     }
-
+    
+    protected BindingResult validateEntity(Object toValidate) {
+        DataBinder binder = new DataBinder(toValidate);
+        binder.setValidator(this.validator);
+        ValidationUtils.invokeValidator(validator, toValidate, binder.getBindingResult());
+        return binder.getBindingResult(); 
+    }
 }

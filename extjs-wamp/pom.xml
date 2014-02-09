@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.dbs.sb</groupId>
 	<artifactId>extjs-wamp</artifactId>
-	<version>1.0</version>
+	<version>1.1</version>
 	<packaging>war</packaging>
 
 	<prerequisites>
@@ -13,9 +13,9 @@
 	<properties>
 		<spring.version>4.0.1.RELEASE</spring.version>
 		<spring-security.version>3.2.0.RELEASE</spring-security.version>
-
+		<eds.version>1.4.0</eds.version>
 		<hibernate.version>4.3.0.Final</hibernate.version>
-
+		<hibernatevalidator.version>5.0.1.Final</hibernatevalidator.version>
 		<querydsl.version>3.3.0</querydsl.version>
 		<eds.version>1.4.0</eds.version>
 		<slf4j.version>1.7.5</slf4j.version>
@@ -105,7 +105,11 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency> -->
-
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernatevalidator.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
@@ -246,6 +250,11 @@
 			<groupId>ch.rasc</groupId>
 			<artifactId>wampspring</artifactId>
 			<version>1.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.ralscha</groupId>
+			<artifactId>extdirectspring</artifactId>
+			<version>${eds.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish.web</groupId>

@@ -4,6 +4,7 @@
  * 
  * @author dbs
  * @version V0.1 initial version
+ * @version V0.2 isActive method improvement
  */
 Ext.define ('Ext.ux.ws.wamp.Manager', {
 	alternateClassName: ['Ext.WampMgr'],
@@ -60,7 +61,7 @@ Ext.define ('Ext.ux.ws.wamp.Manager', {
 		return this;
 	},
 	isActive: function(){
-		return this.absession !== null;
+		return this.absession !== null && this.absession._websocket_connected;
 	},
 	setDebug: function(isDebug){
 		ab.debug(this.debug = isDebug, isDebug);
@@ -157,5 +158,25 @@ Ext.define ('Ext.ux.ws.wamp.Manager', {
 		if(!this.isActive())
 			return;
 		this.absession.subscribe(prefix ? Ext.String.format('{0}:{1}', prefix, topic) : topic, fn);
+	},
+	/**
+	 * wrapper call to wamp
+	 * @param topic 
+	 * @param fnSuccess
+	 * @param fnError
+	 * @param scope
+	 * return true if call made false otherwise
+	 */
+	call: function(topic, params, fnSuccess, fnError, scope){
+		if(!this.isActive())
+			return false;
+		this.absession.call(topic, params).then(
+    			function(res) {
+    				fnSuccess.call(scope, res);
+    			},
+    			function(err) {
+    				onFailure.call(scope, err);
+    			});
+		return true;
 	}
 });

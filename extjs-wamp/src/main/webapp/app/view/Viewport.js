@@ -10,10 +10,13 @@ Ext.define('WA.view.Viewport', {
 	initComponent: function() {
 		this.items = [ {
 			xtype: 'griditems',
-			flex: 1
+			flex: 0.4
 		},{
 			xtype: 'griditemsw',
-			flex: 1
+			flex: 0.4
+		}, {
+			xtype: 'formpanel',
+			flex: 0.2
 		} ];
 		this.callParent(arguments);
 	}
