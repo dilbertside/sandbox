@@ -6,8 +6,9 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 
-import ch.ralscha.extdirectspring.generator.Model;
-import ch.ralscha.extdirectspring.generator.ModelField;
+import ch.rasc.extclassgenerator.Model;
+import ch.rasc.extclassgenerator.ModelField;
+
 
 @Model(value = "Starter.model.User", paging = true, createMethod = "storeService.create", readMethod = "storeService.read", updateMethod = "storeService.update", destroyMethod = "storeService.destroy")
 public class User {
