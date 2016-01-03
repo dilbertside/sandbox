@@ -18,7 +18,9 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.3:compile (default-compile) @ AJC-4847 ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 2 source files to /sandbox/AJC-4847/target/classes
+[INFO] Compiling 7 source files to /sandbox/AJC-4847/target/classes
+[INFO] /sandbox/AJC-4847/src/main/java/com/example/repository/CountryRepository.java: /sandbox/AJC-4847/src/main/java/com/example/repository/CountryRepository.java uses or overrides a deprecated API.
+[INFO] /sandbox/AJC-4847/src/main/java/com/example/repository/CountryRepository.java: Recompile with -Xlint:deprecation for details.
 [INFO] 
 [INFO] --- aspectj-maven-plugin:1.8:compile (default) @ AJC-4847 ---
 [INFO] Showing AJC message detail for messages of types: [error, warning, fail]
@@ -32,19 +34,19 @@
 	<unknown source file>:<no line information>
 
 [ERROR] Internal compiler error: java.lang.IllegalStateException: Failed to write metadata at org.springframework.boot.configurationprocessor.ConfigurationMetadataAnnotationProcessor.writeMetaData(ConfigurationMetadataAnnotationProcessor.java:385)
-	/sandbox/AJC-4847/src/main/java/com/example/AppProperties.java:0
+	/sandbox/AJC-4847/target/generated-sources/java/com/example/domain/QAbstractEntity.java:0
 (no source information available)
 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 8.697 s
-[INFO] Finished at: 2016-01-03T09:58:23+07:00
-[INFO] Final Memory: 37M/312M
+[INFO] Total time: 7.635 s
+[INFO] Finished at: 2016-01-03T14:21:46+07:00
+[INFO] Final Memory: 39M/339M
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.codehaus.mojo:aspectj-maven-plugin:1.8:compile (default) on project AJC-4847: AJC compiler errors:
 [ERROR] error at (no source information available)
-[ERROR] /sandbox/AJC-4847/src/main/java/com/example/AppProperties.java:0::0 Internal compiler error: java.lang.IllegalStateException: Failed to write metadata at org.springframework.boot.configurationprocessor.ConfigurationMetadataAnnotationProcessor.writeMetaData(ConfigurationMetadataAnnotationProcessor.java:385)
+[ERROR] /sandbox/AJC-4847/target/generated-sources/java/com/example/domain/QAbstractEntity.java:0::0 Internal compiler error: java.lang.IllegalStateException: Failed to write metadata at org.springframework.boot.configurationprocessor.ConfigurationMetadataAnnotationProcessor.writeMetaData(ConfigurationMetadataAnnotationProcessor.java:385)
 [ERROR] -> [Help 1]
 [ERROR] 
 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
