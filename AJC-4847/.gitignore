@@ -1,0 +1,32 @@
+#Macosx ignore
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows ignore
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+#Linux ignore
+*~
+
+#SVN ignore
+.svn/
+CVS
+
+*.db
+/.settings
+.springBeans
+.project
+.classpath
+.factorypath
+.apt_generated
+
+target/
+

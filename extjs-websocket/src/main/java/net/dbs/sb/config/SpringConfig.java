@@ -60,7 +60,7 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
 
 	    DefaultSockJsService sockJsService = new DefaultSockJsService(taskScheduler());
         //sockJsService.setSockJsClientLibraryUrl("https://cdn.sockjs.org/sockjs-0.3.4.min.js");
-        sockJsService.setSockJsClientLibraryUrl("http://localhost:8080/sockjs-0.3.4.min.js");
+        sockJsService.setSockJsClientLibraryUrl("http://localhost:8080/res/js/sockjs-0.3.4.min.js");
         //HttpRequestHandler requestHandler = new SockJsHttpRequestHandler(sockJsService, stompWebSocketHandler());
         Map<String, Object> urlMap = new HashMap<String, Object>();
         urlMap.put("/echo", new WebSocketHttpRequestHandler(echoWebSocketHandler()));
