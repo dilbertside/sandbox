@@ -1,67 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
- <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
- <groupId>com.example</groupId>
- <artifactId>AJC-4847</artifactId>
- <version>0.0.1</version>
- <packaging>jar</packaging>
+  <parent>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <groupId>org.springframework.boot</groupId>
+    <version>1.3.1.RELEASE</version>
+    <relativePath />
+    <!-- lookup parent from repository -->
+  </parent>
 
- <name>AJC-4847</name>
- <description>Document how to combine AspectJ compile time weaving with our annotation processor 
+  <groupId>com.example</groupId>
+  <artifactId>AJC-4847</artifactId>
+  <version>0.0.1</version>
+  <packaging>jar</packaging>
+
+  <name>AJC-4847</name>
+  <description>Document how to combine AspectJ compile time weaving with our annotation processor 
 https://github.com/spring-projects/spring-boot/issues/4847
 
-http://start.spring.io/starter.zip?name=AJC-4847&amp;groupId=com.example&amp;artifactId=demo&amp;version=0.0.1-SNAPSHOT&amp;description=Document+how+to+combine+AspectJ+compile+time+weaving+with+our+annotation+processor+https%3A%2F%2Fgithub.com%2Fspring-projects%2Fspring-boot%2Fissues%2F4847&amp;packageName=com.example&amp;type=maven-project&amp;packaging=jar&amp;javaVersion=1.7&amp;language=java&amp;bootVersion=1.3.1.RELEASE&amp;dependencies=cache&amp;dependencies=devtools&amp;dependencies=aop&amp;dependencies=security&amp;dependencies=data-jpa&amp;dependencies=thymeleaf&amp;dependencies=web
+http://start.spring.io/starter.zip?name=AJC-4847&amp;groupId=com.example&amp;artifactId=demo&amp;version=0.0.1-SNAPSHOT&amp;description=Document+how+to+combine+AspectJ+compile+time+weaving+with+our+annotation+processor+https%3A%2F%2Fgithub.com%2Fspring-projects%2Fspring-boot%2Fissues%2F4847&amp;packageName=com.example&amp;type=maven-project&amp;packaging=jar&amp;javaVersion=1.7&amp;language=java&amp;bootVersion=1.3.1.RELEASE&amp;dependencies=cache&amp;dependencies=devtools&amp;dependencies=aop&amp;dependencies=security&amp;dependencies=data-jpa&amp;dependencies=thymeleaf&amp;dependencies=web</description>
 
-</description>
+  <properties>
+    <java.version>1.7</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <querydsl.version>3.6.9</querydsl.version>
+    <neo4j-cypher-dsl.version>2.0.1</neo4j-cypher-dsl.version>
+  </properties>
 
- <parent>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-parent</artifactId>
-  <version>1.3.1.RELEASE</version>
-  <relativePath /> <!-- lookup parent from repository -->
- </parent>
-
- <properties>
-  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  <java.version>1.7</java.version>
-  <querydsl.version>3.6.9</querydsl.version>
- </properties>
-
- <dependencies>
-  <dependency>
-   <groupId>org.springframework.boot</groupId>
-   <artifactId>spring-boot-starter-aop</artifactId>
-  </dependency>
-  <dependency>
-   <groupId>org.springframework.boot</groupId>
-   <artifactId>spring-boot-starter-cache</artifactId>
-  </dependency>
-  <dependency>
-   <groupId>org.springframework.boot</groupId>
-   <artifactId>spring-boot-starter-data-jpa</artifactId>
-  </dependency>
-  <dependency>
-   <groupId>org.springframework.boot</groupId>
-   <artifactId>spring-boot-devtools</artifactId>
-  </dependency>
-  <dependency>
-   <groupId>org.springframework.boot</groupId>
-   <artifactId>spring-boot-starter-security</artifactId>
-  </dependency>
-  <dependency>
-   <groupId>org.springframework.boot</groupId>
-   <artifactId>spring-boot-starter-thymeleaf</artifactId>
-  </dependency>
-  <dependency>
-   <groupId>org.springframework.boot</groupId>
-   <artifactId>spring-boot-starter-web</artifactId>
-  </dependency>
-  <dependency>
-   <groupId>org.apache.activemq</groupId>
-   <artifactId>activemq-client</artifactId>
-  </dependency>
-  <dependency>
+  <dependencies>
+    <dependency>
       <groupId>com.mysema.querydsl</groupId>
       <artifactId>querydsl-apt</artifactId>
       <version>${querydsl.version}</version>
@@ -72,15 +40,14 @@ http://start.spring.io/starter.zip?name=AJC-4847&amp;groupId=com.example&amp;art
       <version>${querydsl.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-client</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator</artifactId>
     </dependency>
-  <dependency>
-   <groupId>org.springframework.boot</groupId>
-   <artifactId>spring-boot-starter-test</artifactId>
-   <scope>test</scope>
-  </dependency>
-  <dependency>
+    <dependency>
       <groupId>org.neo4j</groupId>
       <artifactId>neo4j-kernel</artifactId>
       <!-- <version>${neo4j.version}</version> -->
@@ -88,24 +55,120 @@ http://start.spring.io/starter.zip?name=AJC-4847&amp;groupId=com.example&amp;art
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
- </dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-aop</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-cache</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+     <groupId>org.springframework.boot</groupId>
+     <artifactId>spring-boot-configuration-processor</artifactId>
+     <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-neo4j</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.neo4j</groupId>
+      <artifactId>neo4j-cypher-dsl</artifactId>
+      <version>2.0.1</version>
+    <exclusions>
+        <exclusion>
+          <groupId>org.neo4j</groupId>
+          <artifactId>neo4j</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+  </dependencies>
 
- <build>
-  <plugins>
-   <plugin>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-maven-plugin</artifactId>
-   </plugin>
-   <plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-compiler-plugin</artifactId>
-    <version>3.3</version>
-    <configuration>
-     <source>${java.version}</source>
-     <target>${java.version}</target>
-    </configuration>
-   </plugin>
-   <plugin>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.github.ekryd.sortpom</groupId>
+        <artifactId>sortpom-maven-plugin</artifactId>
+        <version>2.5.0</version>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>sort</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <sortProperties>true</sortProperties>
+          <nrOfIndentSpace>2</nrOfIndentSpace>
+          <sortDependencies>groupId,artifactId</sortDependencies>
+          <sortPlugins>groupId,artifactId</sortPlugins>
+          <keepBlankLines>true</keepBlankLines>
+          <expandEmptyElements>false</expandEmptyElements>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.mysema.maven</groupId>
+        <artifactId>apt-maven-plugin</artifactId>
+        <version>1.1.3</version>
+        <executions>
+          <execution>
+            <id>neo4j</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>process</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>target/generated-sources/java</outputDirectory>
+              <processor>org.springframework.data.neo4j.querydsl.SDNAnnotationProcessor</processor>
+              <showWarnings>true</showWarnings>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-apt</artifactId>
+            <version>${querydsl.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
         <version>1.4.1</version>
@@ -182,7 +245,7 @@ http://start.spring.io/starter.zip?name=AJC-4847&amp;groupId=com.example&amp;art
           </dependency>
         </dependencies>
         <configuration>
-          <showWeaveInfo/>
+          <showWeaveInfo />
           <forceAjcCompile>true</forceAjcCompile>
           <Xlint>ignore</Xlint>
           <outxml>true</outxml>
@@ -205,54 +268,21 @@ http://start.spring.io/starter.zip?name=AJC-4847&amp;groupId=com.example&amp;art
         </configuration>
       </plugin>
       <plugin>
-        <groupId>com.mysema.maven</groupId>
-        <artifactId>apt-maven-plugin</artifactId>
-        <version>1.1.3</version>
-        <executions>
-          <execution>
-            <id>neo4j</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>process</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>target/generated-sources/java</outputDirectory>
-              <processor>org.springframework.data.neo4j.querydsl.SDNAnnotationProcessor</processor>
-              <showWarnings>true</showWarnings>
-            </configuration>
-          </execution>
-        </executions>
-        <dependencies>
-          <dependency>
-            <groupId>com.mysema.querydsl</groupId>
-            <artifactId>querydsl-apt</artifactId>
-            <version>${querydsl.version}</version>
-          </dependency>
-        </dependencies>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
-      <plugin>
-        <groupId>com.github.ekryd.sortpom</groupId>
-        <artifactId>sortpom-maven-plugin</artifactId>
-        <version>2.5.0</version>
-        <executions>
-          <execution>
-            <phase>verify</phase>
-            <goals>
-              <goal>sort</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <sortProperties>true</sortProperties>
-          <nrOfIndentSpace>2</nrOfIndentSpace>
-          <sortDependencies>groupId,artifactId</sortDependencies>
-          <sortPlugins>groupId,artifactId</sortPlugins>
-          <keepBlankLines>true</keepBlankLines>
-          <expandEmptyElements>false</expandEmptyElements>
-        </configuration>
-      </plugin>
-  </plugins>
- </build>
-
-
+    </plugins>
+  </build>
+  <repositories>
+    <repository>
+      <id>neo4j</id>
+      <name>Neo4j</name>
+      <url>http://m2.neo4j.org/</url>
+    </repository>
+    <repository>
+      <id>spring-io-repo</id>
+      <name>spring-io-repo</name>
+      <url>http://repo.spring.io/repo/</url>
+    </repository>
+  </repositories>
 </project>
