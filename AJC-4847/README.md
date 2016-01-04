@@ -16,7 +16,7 @@ mvn clean compile
 ```
 compile-fail.log has also the command printout.
 
-###How to remove the compilation error
+###How to remove the compilation error 1st solution
 comment in /AJC-4847/src/main/java/com/example/AppProperties.java line 16 starting by `@ConfigurationProperties`
 
 Run again
@@ -29,6 +29,16 @@ no errors such as
 [ERROR] Internal compiler error: java.lang.IllegalStateException: Failed to write metadata at org.springframework.boot.configurationprocessor.ConfigurationMetadataAnnotationProcessor.writeMetaData(ConfigurationMetadataAnnotationProcessor.java:385)
   /../AJC-4847/src/main/java/com/example/AppProperties.java:0
 ```
+###How to remove the compilation error 2nd solution (suggested by @anaram)
+comment following lines in pom.xml
+```XML
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+    </dependency> 
+```
+
 
 Thing I notice is the following: 
 [WARNING] Field value processing of @ConfigurationProperty meta-data is not supported
