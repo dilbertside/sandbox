@@ -181,6 +181,7 @@
           <target>${java.version}</target>
         </configuration>
         <dependencies>
+          <!-- no obvious benefit by adding  spring-boot-configuration-processor here, properties editor is not active -->
           <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
@@ -203,7 +204,6 @@
         </executions>
         <configuration>
           <rules>
-            <!-- Ensure no conflicting jar versions <requireUpperBoundDeps /> <requirePluginVersions /> <dependencyConvergence /> -->
             <bannedDependencies>
               <searchTransitive>true</searchTransitive>
               <excludes>
@@ -226,11 +226,11 @@
               </includes>
             </bannedDependencies>
             <requireMavenVersion>
-              <message>You are running an older version of Maven. QAF requires at least Maven 3.3.3</message>
+              <message>You are running an older version of Maven. ${project.artifactId} requires at least Maven 3.3.3</message>
               <version>[3.3.3,)</version>
             </requireMavenVersion>
             <requireJavaVersion>
-              <message>You are running an older version of Java. QAF requires at least JDK ${java.version}</message>
+              <message>You are running an older version of Java. ${project.artifactId} requires at least JDK ${java.version}</message>
               <version>[${java.version}.0,)</version>
             </requireJavaVersion>
           </rules>
