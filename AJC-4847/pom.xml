@@ -273,6 +273,7 @@
           <complianceLevel>${java.version}</complianceLevel>
           <source>${java.version}</source>
           <target>${java.version}</target>
+          <sources/>
         </configuration>
       </plugin>
       <plugin>
