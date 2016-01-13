@@ -174,7 +174,6 @@
         <configuration>
           <source>${java.version}</source>
           <target>${java.version}</target>
-          <proc>none</proc>
         </configuration>
       </plugin>
       <plugin>
@@ -273,7 +272,13 @@
           <complianceLevel>${java.version}</complianceLevel>
           <source>${java.version}</source>
           <target>${java.version}</target>
-          <sources/>
+          <sources>
+            <source>
+              <excludes>
+                <exclude>com.example.AppProperties</exclude>
+              </excludes>
+            </source>
+          </sources>
         </configuration>
       </plugin>
       <plugin>
